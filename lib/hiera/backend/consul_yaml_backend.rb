@@ -44,10 +44,10 @@ class Hiera
         found  = false
 
         Backend.datasources(scope, order_override) do |source|
-          answer = wrapquery("/v1/kv/configuration/#{source}")
+          yaml_data = wrapquery("/v1/kv/configuration/#{source}")
 
           data = {}
-          data = YAML.load(answer) if answer
+          data = YAML.load(yaml_data) if yaml_data
 
           next if data.empty?
           next unless data.include?(key)
